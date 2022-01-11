@@ -1,8 +1,8 @@
 // implement your posts router here
 const { Router } = require("express");
 const express = require("express");
-const { route } = require("../server");
-const Post = require("./posts-model");
+// const { route } = require("../server");
+// const Post = require("./posts-model");
 const router = express.Router();
 
 // router.get("/api/posts", (req, res) => {
@@ -11,7 +11,10 @@ const router = express.Router();
 //   });
 // });
 
-router.get("/", (req, res) => {});
+router.get("/", (req, res) => {
+  res.json("foo");
+  //   console.log("dfjasiosf");
+});
 
 router.get("/:id", (req, res) => {});
 router.post("/", (req, res) => {});
