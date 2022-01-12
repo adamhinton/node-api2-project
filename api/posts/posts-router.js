@@ -42,7 +42,26 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {});
+router.post("/", (req, res) => {
+  const { title, contents } = req.body;
+  if (!title || !contents) {
+    res
+      .status(400)
+      .json({ message: "Please provide title and contents for the post" });
+  } else {
+    Post.insert({ title, contents })
+      //two thens is on purpose here
+      .then(({ id }) => {
+        return Post.findById(id);
+      })
+      .then((post) => {
+        res.status(201).json(post);
+      })
+      .catch((err) => {
+        console.log("error while saving post to database");
+      });
+  }
+});
 
 router.delete("/:id", (req, res) => {});
 
