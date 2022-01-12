@@ -115,5 +115,5 @@ router.put("/:id", (req, res) => {
   }
 });
 
-router.get("/:id/messages", (req, res) => {});
+router.get("/:id/comments", (req, res) => {});
 module.exports = router;
