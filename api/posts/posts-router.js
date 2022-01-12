@@ -13,7 +13,7 @@ const router = express.Router();
 
 //Future Adam: don't be fooled by the /, this is /api/posts, all of them are.
 router.get("/", (req, res) => {
-  Post.find(req.query)
+  Post.find()
     .then((posts) => {
       res.status(200).json(posts);
     })
@@ -25,7 +25,23 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {});
+router.get("/:id", (req, res) => {
+  Post.findById(req.params.id)
+    .then((post) => {
+      post
+        ? res.status(200).json(post)
+        : res
+            .status(404)
+            .json({ message: "The post with the specified ID does not exist" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        message: "The post information could not be retrieved",
+      });
+    });
+});
+
 router.post("/", (req, res) => {});
 
 router.delete("/:id", (req, res) => {});
